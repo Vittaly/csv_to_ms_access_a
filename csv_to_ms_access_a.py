@@ -470,13 +470,26 @@ def main(argv):
 
 
         for nf in new_files:
+
+            logFileNameff = os.path.join(BASE_DIR, nf + '.log')
+            hdlr2 = logging.FileHandler(logFileNameff)
+            hdlr2.setFormatter(formatter)
+            logger.addHandler(hdlr2)
+
             logger.info('Start processing the file {0}'.format(nf))
+
+            process_csv_file(nf)
+
             if csv_file_isCorrect(nf):
-                process_csv_file(nf)
+
+
                 move(os.path.join(NEW_DIR, nf), os.path.join(OLD_DIR, nf))
             else:
                 logger.error('file {0} if bad moving to dir {1}'.format(nf, BAD_DIR))
                 move(os.path.join(NEW_DIR, nf), os.path.join(BAD_DIR, nf))
+            logger.info('End processing the file {0}'.format(nf))
+            logger.removeHandler(hdlr2)
+
         logger.info('No more files. Stoping...')
 
 
