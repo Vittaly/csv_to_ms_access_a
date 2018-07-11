@@ -6,6 +6,9 @@ __author__ = 'Vitaliy.Burkut'
 # 0.1 Created       (very slow)
 # 0.2 try with dbf (slow)
 # 0.3 try withh direct csv read from access (fast)
+# 0.4 isolate stat sql to try section
+# 0.5 add different log files
+# 0.6 add split tmp files if found duplicate rows
 ################################################################################
 
 ###############################  libs  #########################################
