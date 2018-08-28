@@ -9,6 +9,8 @@ __author__ = 'Vitaliy.Burkut'
 # 0.4 isolate stat sql to try section
 # 0.5 add different log files
 # 0.6 add split tmp files if found duplicate rows
+# 0.7 added third field with Name River to ID
+
 ################################################################################
 
 ###############################  libs  #########################################
@@ -314,8 +316,8 @@ def csv_file_isCorrect(p_csv_file_name):
     if len(headers) < 8:
         logger.error('total count of headers is less then eight')
         return False
-    if '_'.join(headers[0:3]) != "Flop_Turn_Hand":
-        logger.error('Headers of first 3th fields is not "Flop", "Turn" and "Hand"')
+    if '_'.join(headers[0:4]) != "Flop_Turn_River_Hand":
+        logger.error('Headers of first 4th fields is not "Flop", "Turn", "River" and "Hand"')
         return False
 
     return True
@@ -342,10 +344,10 @@ def get_file_index_by_key(p_key):
             return i
 
 def get_row_id(p_csv_rec):
-    return  '_'.join([p_csv_rec[0], p_csv_rec[1], p_csv_rec[2]])
+    return  '_'.join([p_csv_rec[0], p_csv_rec[1], p_csv_rec[2], p_csv_rec[3]])
 
 def get_tab_rec(p_csv_rec):
-    res =  (get_row_id(p_csv_rec),) + tuple(f.replace('.', '') for f in p_csv_rec[7:len(p_csv_rec)-1])
+    res =  (get_row_id(p_csv_rec),) + tuple(f.replace('.', '') for f in p_csv_rec[8:len(p_csv_rec)-1])
     return res
 
 
@@ -526,11 +528,10 @@ def main(argv):
 
             logger.info('Start processing the file {0}'.format(nf))
 
-            process_csv_file(nf)
+
 
             if csv_file_isCorrect(nf):
-
-
+                process_csv_file(nf)
                 move(os.path.join(NEW_DIR, nf), os.path.join(OLD_DIR, nf))
             else:
                 logger.error('file {0} if bad moving to dir {1}'.format(nf, BAD_DIR))
