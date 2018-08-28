@@ -9,6 +9,8 @@ __author__ = 'Vitaliy.Burkut'
 # 0.4 isolate stat sql to try section
 # 0.5 add different log files
 # 0.6 add split tmp files if found duplicate rows
+# 0.7 added third field with Name River to ID
+
 ################################################################################
 
 ###############################  libs  #########################################
