@@ -415,7 +415,7 @@ def process_csv_file(p_csv_file_name):
             tmp_csv_fn = 'tmp_{0}_part_{1}.csv'.format(i+1, file_index_list[i])
             file_index_list[i] +=1
 
-            put_recorss_to_csv_file(tmp_csv_fn, rec_dict[file_index - 1].values())
+            put_recorss_to_csv_file(tmp_csv_fn, rec_dict[i].values())
 
 ##            tmp_tab_file_name =  os.path.join(TEMP_DIR,  tmp_csv_fn )
 ##            tmp_tab_file = open (tmp_tab_file_name, 'w',newline='')
@@ -424,7 +424,7 @@ def process_csv_file(p_csv_file_name):
 ##            tmp_table.writerows(rec_dict[i].values())
 ##            tmp_tab_file.close()
             # write info to queue
-            logger.debug('write to queue msg:'.format([tmp_csv_fn, len(rec_dict[i])]))
+            logger.debug('write to queue msg: file name:{0}, size:{1}'.format(tmp_csv_fn, len(rec_dict[i])))
             queues[i].put([tmp_csv_fn, len(rec_dict[i])])
 
             row_count_per_file[i] += len(rec_dict[i])
