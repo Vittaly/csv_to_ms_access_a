@@ -413,7 +413,7 @@ def process_csv_file(p_csv_file_name):
             tmp_csv_fn = 'tmp_{0}_part_{1}.csv'.format(i+1, file_index_list[i])
             file_index_list[i] +=1
 
-            put_recorss_to_csv_file(tmp_csv_fn, rec_dict[file_index - 1].values())
+            put_recorss_to_csv_file(tmp_csv_fn, rec_dict[i].values())
 
 ##            tmp_tab_file_name =  os.path.join(TEMP_DIR,  tmp_csv_fn )
 ##            tmp_tab_file = open (tmp_tab_file_name, 'w',newline='')
